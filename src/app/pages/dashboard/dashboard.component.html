@@ -169,11 +169,11 @@
       <section class="section">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Bordered Table</h5>
+            <h5 class="card-title">Resultados</h5>
 
             <!-- Bordered Table -->
             <table class="table table-bordered table-responsive table-hover">
-              <thead>
+              <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
@@ -220,24 +220,24 @@
                 </tr>
               </tbody>
             </table>
-        
+            <br>
+            <h5 class="card-title">Grafica</h5>
+            <div style="text-align:center">
+              <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [xaxis]="chartOptions.xaxis"
+                [title]="chartOptions.title"
+              ></apx-chart>
+            </div>
+            
           </div>
         </div>
 
       </section>
 
       <section class="section">
-        <!--<div>
-          <div>
-            <div style="display: block">
-              <canvas baseChart
-                [data]="doughnutChartData"
-                [labels]="doughnutChartLabels"
-                [chartType]="doughnutChartType">
-              </canvas>
-            </div>
-          </div>
-        </div>-->
+        
       </section>
       
   </section>

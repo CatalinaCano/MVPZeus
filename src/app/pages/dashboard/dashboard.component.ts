@@ -1,5 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartType } from 'chart.js';
+import { Component, ViewChild } from '@angular/core';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+};
 
 
 
@@ -8,26 +21,33 @@ import { ChartType } from 'chart.js';
   templateUrl: './dashboard.component.html',
   styleUrls: []
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
- 
-  public doughnutChartType: ChartType = 'doughnut';
+  @ViewChild("chart")
+  chart!: ChartComponent | any;
+  public chartOptions!: Partial<ChartOptions> | any;
 
   constructor() {
-
- 
-   }
- 
-   ngOnInit(): void {  }
- 
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    this.chartOptions = {
+      series: [
+        {
+          name: "My-series",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "bar"
+      },
+      title: {
+        text: "My First Angular Chart"
+      },
+      xaxis: {
+        categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
+      }
+    };
   }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
+  
  
 
 }
