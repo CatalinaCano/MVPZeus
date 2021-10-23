@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartType } from 'chart.js';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+ 
+  public doughnutChartType: ChartType = 'doughnut';
 
-  ngOnInit(): void {
+  constructor() {
+
+ 
+   }
+ 
+   ngOnInit(): void {  }
+ 
+  // events
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
   }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+ 
 
 }
