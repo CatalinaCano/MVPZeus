@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  date = new Date().toDateString();
+
   constructor() { }
 
   ngOnInit(): void {
