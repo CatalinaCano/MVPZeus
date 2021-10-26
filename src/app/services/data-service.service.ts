@@ -9,7 +9,7 @@ export class DataService {
   private data: Data[] =
   [
     {
-      id: 899999068,
+      id: 12345,
       name: 'ECOPETROL',
       supervisor: 'SUPERFINANCIERA',
       region:'CENTRO - ORIENTE',
