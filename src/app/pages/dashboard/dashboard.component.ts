@@ -22,8 +22,7 @@ export type ChartOptions = {
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: []
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent {
 
