@@ -3,8 +3,8 @@
     <br>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html"> <i class="bx bxs-home"></i>   Home</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
+        <li class="breadcrumb-item"><i class="bx bxs-home"></i> Home</li>
+        <li class="breadcrumb-item active">     <i class="bi bi-grid"></i> Dashboard</li>
       </ol>
     </nav>
   </div>
@@ -17,7 +17,7 @@
           <small> En esta sección podrás visualizar y descargar todos los movimientos asociados a tu negocio.</small>
       </div>
     </div>
-    
+   
 
       <div class="card-body center-block">
           <div class="form-body">
@@ -25,7 +25,7 @@
                   <div class="row" >
                       <form class=" col-md-12 p-t-20 mt-4 form-inline">
                           <div class="input-group">
-                              <input type="text" class="form-control border-0 small" placeholder="Buscar ..." name="filterReport"  aria-label="Search">
+                              <input type="text" class="form-control border-0 small" placeholder="Buscar por NIT..." name="filterReport"  aria-label="Search">
                               <div class="input-group-append">
                                   <button class="btn btn-primary" type="button">
                                     <i class="bi bi-search"></i>
@@ -38,7 +38,12 @@
           </div>
       </div>
 
-      
+
+      <div *ngIf="Noresults" class="alert alert-danger alert-dismissible fade show" role="alert">
+        No hay resultados asociados a la busqueda.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
       <section class="section dashboard">
         <div class="row">
           <div class="col-lg-12">
@@ -50,13 +55,13 @@
                   </div>
   
                   <div class="card-body">
-                    <h5 class="card-title">Inventario</h5>
+                    <h5 class="card-title">{{client.indexes[0].name}}</h5>
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-cart"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>25.769</h6>
+                        <h6>{{client.indexes[0].value | number}}</h6>
                       </div>
                     </div>
                   </div>
@@ -69,13 +74,13 @@
                     <a class="icon"  data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">Activo Corriente</h5>
+                    <h5 class="card-title">{{client.indexes[1].name}}</h5>
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>$78.828</h6>
+                        <h6>{{client.indexes[1].value | number}}</h6>
                       </div>
                     </div>
                   </div>
@@ -89,13 +94,13 @@
                     <a class="icon" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">Clientes</h5>
+                    <h5 class="card-title">{{client.indexes[2].name}}</h5>
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-people"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>32.733</h6>
+                        <h6>{{client.indexes[2].value | number}}</h6>
                       </div>
                     </div>
                   </div>
@@ -108,13 +113,13 @@
                     <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">Customers</h5>
+                    <h5 class="card-title">{{client.indexes[3].name}}</h5>
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-people"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>1244</h6>
+                        <h6>{{client.indexes[3].value | number}}</h6>
                       </div>
                     </div>
                   </div>
@@ -137,37 +142,36 @@
                   <div class="row mb-3">
                     <label for="inputText" class="col-sm-2 col-form-label">NIT</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" value="899999068" disabled>
+                      <input type="text" class="form-control" value={{client.id}} disabled>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="inputEmail" class="col-sm-4 col-form-label">Razón Social</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" value="ECOPETROL" disabled>
+                      <input type="text" class="form-control" value={{client.name}} disabled>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="inputPassword" class="col-sm-4 col-form-label">Supervisor</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" value="SUPERFINANCIERA" disabled>
+                      <input type="text" class="form-control" value={{client.supervisor}} disabled>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="inputNumber" class="col-sm-3 col-form-label">Región</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" value="CENTRO - ORIENTE" disabled>
+                      <input type="text" class="form-control" value={{client.region}} disabled>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">Macrosector</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" value="MINERO" disabled>
+                      <input type="text" class="form-control" value={{client.macrosector}} disabled>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-sm-12">
-                      <textarea class="form-control" style="height: 300px" disabled>Compañia con 17 años en el Mcdo, con ventas de mas de 500 mil millons y una disminucion de sus ingresos del 11%. Muestra para el 2020 una utilidad neta del 1,2%, muy similar a la del 2019. presenta una rotacion de cartera de 21 dias, superior a los dias de pago de sus proveedores. Dandole un ciclo de caja de 26 dias. presenta un capital de trabajo de 25 mil millones de pesos, muy ajustado para cubrir sus obligaciones de corto plazo
-                      </textarea>
+                      <textarea class="form-control" style="height: 300px" disabled> {{client.description}}</textarea>
                     </div>
                   </div>
                 </form>
@@ -193,15 +197,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="text-center">
-                      <td>2015</td>
-                      <td>$38.348.460.178</td>
-                      <td>$38.348.460.178</td>
-                      <td>$38.348.460.178</td>
-                      <td>$38.348.460.178</td>
-                      <td>$38.348.460.178</td>
+                    <tr *ngFor="let m of client.metrics" class="text-center" >
+                      <td>{{m.year }}</td>
+                      <td>{{m.operationalRevenue |  currency}}</td>
+                      <td>{{m.lostProfit |  currency}}</td>
+                      <td>{{m.totalAssets |  currency}}</td>
+                      <td>{{m.totalLiabilities |  currency}}</td>
+                      <td>{{m.totalEquity |  currency}}</td>
                     </tr>
-                    
                   </tbody>
                 </table>
 
@@ -215,49 +218,13 @@
     
                   <!-- List group with custom content -->
                   <ol class="list-group list-group-numbered">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let i of client.indexes" >
                       <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Cras justo odio
+                        <div class="fw-bold">{{i.name}}</div>
                       </div>
-                      <span class="badge bg-primary rounded-pill">14</span>
+                      <span class="badge bg-primary rounded-pill">{{i.value | number}}</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Cras justo odio
-                      </div>
-                      <span class="badge bg-primary rounded-pill">14</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Cras justo odio
-                      </div>
-                      <span class="badge bg-primary rounded-pill">14</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Cras justo odio
-                      </div>
-                      <span class="badge bg-primary rounded-pill">14</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Cras justo odio
-                      </div>
-                      <span class="badge bg-primary rounded-pill">14</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Cras justo odio
-                      </div>
-                      <span class="badge bg-primary rounded-pill">14</span>
-                    </li>
-                  </ol><!-- End with custom content -->
+                  </ol>
     
                 </div>
               </div>
@@ -269,7 +236,7 @@
       <section class="section">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Grafica</h5>
+            <h5 class="card-title">Gráfica</h5>
             <div style="text-align:center">
               <apx-chart
                 [series]="chartOptions.series"
@@ -281,10 +248,6 @@
           </div>
         </div>
 
-      </section>
-
-      <section class="section">
-        
       </section>
       
   </section>

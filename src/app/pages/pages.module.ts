@@ -22,7 +22,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgApexchartsModule,
+    NgApexchartsModule
   ],
   exports: [
     DashboardComponent,
