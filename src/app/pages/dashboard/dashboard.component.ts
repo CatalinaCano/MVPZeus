@@ -46,7 +46,7 @@ export class DashboardComponent {
 
     createForm(){
       this.forma = this.formBuilder.group({
-        numeroDocumento: [, [Validators.required, Validators.pattern('[0-9]{5,10}'), Validators.min(8)] ]
+        numeroDocumento: [, [Validators.required, Validators.pattern('[0-9]{5,10}'), Validators.min(4)] ]
       });
    }
     
@@ -116,7 +116,7 @@ export class DashboardComponent {
         this.Noresults= true;
         Swal.fire({
           title: 'No hay Datos!',
-          text: 'No se encontraron datos para el número de documento: '+ this.forma.value.numeroDocumento+' Por favor revise el número ingresado.' ,
+          text: 'No se encontraron datos para el número de documento: '+ this.forma.value.numeroDocumento+'. Por favor revise el número ingresado.' ,
           icon: 'error',
           showConfirmButton: true
         });
