@@ -15,6 +15,31 @@ export class DataService {
       region:'CENTRO - ORIENTE',
       macrosector:'MINERO',
       description:'Compañia con 17 años en el Mcdo, con ventas de mas de 500 mil millons y una disminucion de sus ingresos del 11%. Muestra para el 2020 una utilidad neta del 1,2%, muy similar a la del 2019. presenta una rotacion de cartera de 21 dias, superior a los dias de pago de sus proveedores. Dandole un ciclo de caja de 26 dias. presenta un capital de trabajo de 25 mil millones de pesos, muy ajustado para cubrir sus obligaciones de corto plazo',
+      series: [
+        {
+          name: "Ingresos Operacionales",
+          data: [38348460178,43290600000]
+        },
+        {
+          name: "Ganancia Perdida",
+          data: [1564709318.5,3987726000]
+        },
+        {
+          name: "Total Bienes",
+          data: [101537543738.4,100227213000]
+        },
+        { 
+          name: "Total Pasivo",
+          data: [57863689871.1,56870500000]
+        },
+        { 
+          name: "Total Patrimonio",
+          data: [57863689871.1,56870500000]
+
+        }
+
+      ],
+      categories: [2015,2016],
       metrics:[
         {	
           year: 2016,

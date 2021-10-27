@@ -5,6 +5,8 @@ export interface Data {
      region: string;
      macrosector:string;
      description: string;
+     series :graphData[];
+     categories: number[];
      metrics: metrics [];
      indexes: indexes [];
  }
@@ -21,4 +23,9 @@ export interface Data {
  export interface indexes {
   name: string;
   value: number;
+}
+
+export interface graphData {
+  name: string;
+  data: number[];
 }

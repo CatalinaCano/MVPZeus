@@ -78,36 +78,13 @@ export class DashboardComponent {
         
       
       this.chartOptions = {
-        series: [
-          {
-            name: "Ingresos Operacionales",
-            data: [38348460178,43290600000]
-          },
-          {
-            name: "Ganancia Perdida",
-            data: [1564709318.5,3987726000]
-          },
-          {
-            name: "Total Bienes",
-            data: [101537543738.4,100227213000]
-          },
-          { 
-            name: "Total Pasivo",
-            data: [57863689871.1,56870500000]
-          },
-          { 
-            name: "Total Patrimonio",
-            data: [57863689871.1,56870500000]
-  
-          }
-  
-        ],
+        series:this.client.series,
         chart: {
           height: 350,
           type: "bar"
         },
         xaxis: {
-          categories: [2015,2016]
+          categories: this.client.categories
         }
       };
           }
