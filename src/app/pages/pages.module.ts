@@ -7,13 +7,15 @@ import { AppRoutingModule } from '../app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { DocumentComponent } from './document/document.component';
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    PagesComponent
+    PagesComponent,
+    DocumentComponent
   ],
   imports: [
     CommonModule,
