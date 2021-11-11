@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DocumentComponent } from './document/document.component';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { DocumentComponent } from './document/document.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxDropzoneModule
   ],
   exports: [
     DashboardComponent,
