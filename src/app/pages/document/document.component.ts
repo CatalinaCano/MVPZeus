@@ -12,6 +12,7 @@ export class DocumentComponent implements OnInit {
   files: File[] = [];
   selectedFile = false;
   imgURL: any;
+  showimg= false;
   public imagePath;
 
   constructor(private sanitizer : DomSanitizer) { 
@@ -46,6 +47,7 @@ export class DocumentComponent implements OnInit {
     reader.readAsDataURL(event.addedFiles[0]); 
     reader.onload = (_event) => { 
       this.imgURL = reader.result; 
+      this.showimg = true;
     }
     }
     else{
@@ -57,6 +59,7 @@ export class DocumentComponent implements OnInit {
   onRemove(event) {
     this.files.splice(this.files.indexOf(event), 1);
     this.selectedFile = false;
+    this.showimg=false;
   }
   
   cargarArchivo(){
