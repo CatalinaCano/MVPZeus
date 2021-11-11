@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,30 +8,37 @@ import Swal from 'sweetalert2';
 })
 export class DocumentComponent implements OnInit {
 
-  forma!: FormGroup;
   files: File[] = [];
   selectedFile = false;
-  
-  constructor(private formBuilder: FormBuilder) { 
-    this.createForm();
+
+  constructor() { 
   }
 
-  createForm(){
-    this.forma = this.formBuilder.group({
-      numeroDocumento: [Validators.required ]
-    });
- }
+
 
   ngOnInit(): void {
   }
 
+
+  mostrarError( error: string){
+    Swal.fire({
+      icon: 'error',
+      title: 'Error...',
+      text: error,
+      showConfirmButton: false,
+      showCloseButton: false
+    });
+  }
+
   onSelect(event) {
-    if (event.addedFiles[0].type === 'text/plain' && this.files.length === 0) {
+
+
+    if ((event.addedFiles[0].type === 'image/jpeg' || event.addedFiles[0].type === 'image/png') && this.files.length === 0) {
       this.files.push(...event.addedFiles);
       this.selectedFile = true;
     }
     else{
-      Swal.fire('Error', 'Sólo se puedes adjuntar un único archivo, de tipo .txt', 'error');
+      this.mostrarError( 'Sólo se puedes adjuntar un  archivo de tipo .jpg o .png');
       this.selectedFile = false;
     }
   }
@@ -41,5 +47,20 @@ export class DocumentComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
     this.selectedFile = false;
   }
+  
+  cargarArchivo(){
+   
+    const reader: FileReader = new FileReader();
+    reader.readAsBinaryString(this.files[0]);
+    reader.onload = () => {
+                  const file = btoa(reader.result.toString());
+    } 
+    this.files = [];
+    this.selectedFile = false;
+ 
+  
+  }
 
+ 
+  
 }
