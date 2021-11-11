@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-document',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentComponent implements OnInit {
 
-  constructor() { }
+  forma!: FormGroup;
+  
+  constructor(private formBuilder: FormBuilder) { 
+    this.createForm();
+  }
+
+  createForm(){
+    this.forma = this.formBuilder.group({
+      numeroDocumento: [Validators.required ]
+    });
+ }
 
   ngOnInit(): void {
   }
