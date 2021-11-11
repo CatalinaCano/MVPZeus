@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-document',
@@ -10,14 +11,18 @@ export class DocumentComponent implements OnInit {
 
   files: File[] = [];
   selectedFile = false;
+  imgURL: any;
+  public imagePath;
 
-  constructor() { 
+  constructor(private sanitizer : DomSanitizer) { 
   }
 
 
 
   ngOnInit(): void {
   }
+
+
 
 
   mostrarError( error: string){
@@ -32,10 +37,16 @@ export class DocumentComponent implements OnInit {
 
   onSelect(event) {
 
-
-    if ((event.addedFiles[0].type === 'image/jpeg' || event.addedFiles[0].type === 'image/png') && this.files.length === 0) {
+    var mimeType = event.addedFiles[0].type;
+    if ( mimeType.match(/image\/*/) != null  && this.files.length === 0) {
       this.files.push(...event.addedFiles);
       this.selectedFile = true;
+      var reader = new FileReader();
+    this.imagePath = event.addedFiles;
+    reader.readAsDataURL(event.addedFiles[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
     }
     else{
       this.mostrarError( 'Sólo se puedes adjuntar un  archivo de tipo .jpg o .png');
@@ -54,6 +65,7 @@ export class DocumentComponent implements OnInit {
     reader.readAsBinaryString(this.files[0]);
     reader.onload = () => {
                   const file = btoa(reader.result.toString());
+                  this.imgURL = reader.result;
     } 
     this.files = [];
     this.selectedFile = false;

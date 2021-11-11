@@ -24,7 +24,7 @@
 
                   <div class="col-md-6"> 
                     <div class="mt-5">
-                      <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
+                      <ngx-dropzone [multiple]="false" (change)="onSelect($event)" accept='image/*'>
                         <ngx-dropzone-label>
                             <img src="../../../assets/img/upload-icon.png" width="20%" alt=""> <br> Adjuntar Archivo
                         </ngx-dropzone-label>
@@ -35,6 +35,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">  
+                    <img [src]="imgURL" height="auto" *ngIf="imgURL">
                     <div class="table-responsive mt-3">
                       <table class="table table-hover table-bordered " #table>
                           <thead class="table-dark">
