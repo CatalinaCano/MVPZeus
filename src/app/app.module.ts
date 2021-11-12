@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import {  HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.module';
 
 @NgModule({
@@ -12,7 +13,9 @@ import { PagesModule } from './pages/pages.module';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
+    HttpClientModule,
     PagesModule
   ],
   providers: [],
