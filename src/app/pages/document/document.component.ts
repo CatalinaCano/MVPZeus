@@ -24,6 +24,7 @@ export class DocumentComponent implements OnInit {
   object: Object ;
   ULR48:string;
   textoFinal :string = "";
+  mostrarBoton = false;
 
   ejecucionInicial = true;
 
@@ -144,7 +145,7 @@ export class DocumentComponent implements OnInit {
                                        this.textoFinal += line['text'];
                                     });
 
-                                    
+                                    this.mostrarBoton = true;
                                   });
                               }
                             }); })
@@ -156,6 +157,10 @@ export class DocumentComponent implements OnInit {
  
   
   }
+
+  reload(){
+    window.location.reload();
+   }
 
  
   

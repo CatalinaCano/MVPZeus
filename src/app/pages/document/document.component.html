@@ -91,6 +91,12 @@
         </div>
     </div>
     
-
+    <div  *ngIf="mostrarBoton" class="container-fluid h-100"> 
+      <div class="row w-100">
+          <div class="col v-center">
+              <button (click)="reload()" class="btn btn-success d-block mx-auto">  <i class="bi bi-arrow-clockwise"></i>  Subir una nueva imagen </button>
+          </div>  
+      </div>
+    </div>
       
   </section>
