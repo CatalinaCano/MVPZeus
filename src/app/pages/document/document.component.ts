@@ -9,8 +9,7 @@ import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-document',
-  templateUrl: './document.component.html',
-  styleUrls: ['./document.component.css']
+  templateUrl: './document.component.html'
 })
 export class DocumentComponent implements OnInit {
 
@@ -141,7 +140,7 @@ export class DocumentComponent implements OnInit {
                       this.object = JSON.parse(JSON.stringify(resp.body));
                       this.object['analyzeResult']['readResults'].forEach(element => {
                         element['lines'].forEach(line => {
-                          this.textoFinal += line['text'];
+                          this.textoFinal += line['text']+' ';
                         });
                       });
                     }
