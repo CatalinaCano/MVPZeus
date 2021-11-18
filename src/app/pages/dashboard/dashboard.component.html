@@ -193,28 +193,31 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Ingresos</h5>
-                  <table class="table table-bordered table-responsive table-hover">
-                    <thead class="thead-dark text-center">
-                      <tr>
-                        <th scope="col">AÑO</th>
-                        <th scope="col">INGRESOS OPERACIONALES</th>
-                        <th scope="col">GANANCIA (PERDIDA)</th>
-                        <th scope="col">TOTAL ACTIVOS</th>
-                        <th scope="col">TOTAL PASIVOS</th>
-                        <th scope="col">TOTAL PATRIMONIO</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let m of client.metrics" class="text-center" >
-                        <td>{{m.year }}</td>
-                        <td>{{m.operationalRevenue |  currency}}</td>
-                        <td>{{m.lostProfit |  currency}}</td>
-                        <td>{{m.totalAssets |  currency}}</td>
-                        <td>{{m.totalLiabilities |  currency}}</td>
-                        <td>{{m.totalEquity |  currency}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="table-responsive mt-3">
+                    <table class="table table-bordered table-responsive table-hover">
+                      <thead class="thead-dark text-center">
+                        <tr>
+                          <th scope="col">AÑO</th>
+                          <th scope="col">INGRESOS OPERACIONALES</th>
+                          <th scope="col">GANANCIA (PERDIDA)</th>
+                          <th scope="col">TOTAL ACTIVOS</th>
+                          <th scope="col">TOTAL PASIVOS</th>
+                          <th scope="col">TOTAL PATRIMONIO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let m of client.metrics" class="text-center" >
+                          <td>{{m.year }}</td>
+                          <td>{{m.operationalRevenue |  currency}}</td>
+                          <td>{{m.lostProfit |  currency}}</td>
+                          <td>{{m.totalAssets |  currency}}</td>
+                          <td>{{m.totalLiabilities |  currency}}</td>
+                          <td>{{m.totalEquity |  currency}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                
   
                 </div>
               </div>

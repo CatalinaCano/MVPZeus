@@ -26,7 +26,7 @@
                     <div class="mt-5">
                       <ngx-dropzone [multiple]="false" (change)="onSelect($event)" accept='image/*'>
                         <ngx-dropzone-label>
-                            <img src="../../../assets/img/upload-icon.png" width="20%" alt=""> <br> Adjuntar Archivo
+                            <img src="../../../assets/img/upload-icon.png" class="img-fluid mx-auto d-block" width="20%" alt=""> <br> Adjuntar Archivo
                         </ngx-dropzone-label>
                         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
@@ -35,7 +35,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">  
-                    <img [src]="imgURL" height="auto" *ngIf="showimg" class="img-fluid" alt="Responsive image">
+                    <img [src]="imgURL" height="auto" *ngIf="showimg" class="img-fluid mx-auto d-block" alt="Responsive image">
                     <div class="table-responsive mt-3">
                       <table class="table table-hover table-bordered " #table>
                           <thead class="table-dark">
@@ -75,7 +75,7 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Imágen Cargada</h5>
-                  <img [src]="imgURLFinal" height="auto" class="img-fluid" alt="Responsive image">
+                  <img [src]="imgURLFinal" height="auto" class="img-fluid mx-auto d-block"  alt="Responsive image">
                 </div>
               </div>
             </div>
@@ -85,12 +85,11 @@
                   <h5 class="card-title">Texto</h5>
                   <textarea class="form-control" style="height: 500px" disabled>{{textoFinal}}</textarea>
                     <br>
-                  <div class="row" *ngIf="mostrarAudio">
-                    <div class="col-md-12">
+                  <div class="row"  align="center" *ngIf="mostrarAudio">
                       <audio controls autoplay>
                         <source [src]="fileSource"  type="audio/mpeg">
                       </audio>
-                    </div>
+        
                   </div>
                 </div>
               </div>             
