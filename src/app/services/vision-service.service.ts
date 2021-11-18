@@ -24,7 +24,6 @@ export class VisionServiceService {
   }
 
   getData(url:string){
-    console.log(url);
     return this.http.get<any[]>(url,
                           {
                             headers: new HttpHeaders({
@@ -34,5 +33,9 @@ export class VisionServiceService {
                             observe: 'response'
                           })
     .pipe (map((resp: any) => resp));
+  }
+
+  getAudio(){
+    return 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
   }
 }

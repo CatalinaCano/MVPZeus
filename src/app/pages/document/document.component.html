@@ -84,16 +84,24 @@
                 <div class="card-body">
                   <h5 class="card-title">Texto</h5>
                   <textarea class="form-control" style="height: 500px" disabled>{{textoFinal}}</textarea>
+                    <br>
+                  <div class="row" *ngIf="mostrarAudio">
+                    <div class="col-md-12">
+                      <audio controls autoplay>
+                        <source [src]="fileSource"  type="audio/mpeg">
+                      </audio>
+                    </div>
+                  </div>
                 </div>
               </div>             
             </div>
           </div>
         </div>
     </div>
-    
+
     <div  *ngIf="mostrarBoton" class="container-fluid h-100"> 
       <div class="row w-100">
-          <div class="col v-center">
+          <div class="col v-center">            
               <button (click)="reload()" class="btn btn-success d-block mx-auto">  <i class="bi bi-arrow-clockwise"></i>  Subir una nueva imagen </button>
           </div>  
       </div>
