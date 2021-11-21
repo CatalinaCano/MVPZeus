@@ -26,6 +26,7 @@ export class DocumentComponent implements OnInit {
   mostrarBoton = false;
   mostrarAudio = false;
   ejecucionInicial = true;
+  token: string;
 
   fileSource: any;
   public imagePath;
@@ -88,82 +89,112 @@ export class DocumentComponent implements OnInit {
         type
       );
 
+      Swal.fire({
+        title: 'Subiendo Imágen...',
+        html: 'Por favor espere...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });
+
       this.uploadFileService.uploadFile(this.archivo)
         .subscribe((resp: any) => {
           if (resp.status === 200) {
-
             this.ejecucionInicial = false;
             this.showimg = false;
             this.imgURLFinal = resp.body.fileUrl;
-          }
-
-          Swal.fire({
-            title: 'Subiendo Imágen...',
-            html: 'Por favor espere...',
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-              Swal.showLoading()
-            }
-          });
-
-        }, (err: any) => {
-          this.mostrarError(err.error.message);
-
-        }, () => { // When First Request Complete Call Second Request.
-          Swal.close();
-          this.visionR = new RequestVision(this.imgURLFinal);
-          this.visionService.getUrlData(this.visionR)
-            .subscribe((resp: any) => {
-              if (resp.status === 202) {
-                this.ULR48 = resp.headers.get('Operation-Location');
-              }
-              Swal.fire({
-                title: 'Procesando Imágen...',
-                html: 'Por favor espere...',
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                didOpen: () => {
-                  Swal.showLoading()
+            Swal.close();
+            this.showLoading();
+            this.visionR = new RequestVision(this.imgURLFinal);
+            this.visionService.getUrlData(this.visionR)
+              .subscribe((resp: any) => {
+                if (resp.status === 202) {
+                  this.ULR48 = resp.headers.get('Operation-Location');
                 }
-              });
-
-            }, (err: any) => {
-              this.mostrarError(err.error.message);
-            }, () => {
-
-              timer(5000).subscribe(x => {
-                Swal.close();
-                this.visionService.getData(this.ULR48)
-                  .subscribe((resp: any) => {
-                    if (resp.status === 200) {
-                      this.object = JSON.parse(JSON.stringify(resp.body));
-                      this.object['analyzeResult']['readResults'].forEach(element => {
-                        element['lines'].forEach(line => {
-                          this.textoFinal += line['text']+' ';
+                timer(5000).subscribe(x => {
+                  this.visionService.getData(this.ULR48)
+                    .subscribe((resp: any) => {
+                      if (resp.status === 200) {
+                        this.object = JSON.parse(JSON.stringify(resp.body));
+                        this.object['analyzeResult']['readResults'].forEach(element => {
+                          element['lines'].forEach(line => {
+                            this.textoFinal += line['text'] + ' ';
+                          });
                         });
-                      });
+
+                        this.fileSource = this.visionService.getAudio();
+                        this.mostrarBoton = true;
+                        this.mostrarAudio = true;
+                        Swal.close();
+
+                        /*this.token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpb24iOiJlYXN0dXMyIiwic3Vic2NyaXB0aW9uLWlkIjoiODQwODJlNGJkZjZmNDkyOGE5OGY4ZDg3ZTQzNzhlYjgiLCJwcm9kdWN0LWlkIjoiU3BlZWNoU2VydmljZXMuRjAiLCJjb2duaXRpdmUtc2VydmljZXMtZW5kcG9pbnQiOiJodHRwczovL2FwaS5jb2duaXRpdmUubWljcm9zb2Z0LmNvbS9pbnRlcm5hbC92MS4wLyIsImF6dXJlLXJlc291cmNlLWlkIjoiL3N1YnNjcmlwdGlvbnMvNzBkYzk0ZmEtMDc0My00ZGNhLWE4NWMtY2IwOTc1M2EwM2Q4L3Jlc291cmNlR3JvdXBzL1pldXMvcHJvdmlkZXJzL01pY3Jvc29mdC5Db2duaXRpdmVTZXJ2aWNlcy9hY2NvdW50cy9zcGVlY2hkZW1vemV1cyIsInNjb3BlIjoic3BlZWNoc2VydmljZXMiLCJhdWQiOiJ1cm46bXMuc3BlZWNoc2VydmljZXMuZWFzdHVzMiIsImV4cCI6MTYzNzQ2NTAyMywiaXNzIjoidXJuOm1zLmNvZ25pdGl2ZXNlcnZpY2VzIn0.6Yot-Z0yhwquDf3OexrfnOc_ka8IhlxRn0oHI3Sv7-Q';
+                         this.visionService.getAudioFile(this.token, this.textoFinal )
+                           .subscribe((resp: any)=>{
+                               console.log(resp);
+                           },(err:any)=>{
+                             this.mostrarError(err.error.error.message);
+                           });*/
+                      
+
+                        /*this.visionService.getToken()
+                          .subscribe((resp: any) => {
+                            console.log(resp);
+                            if (resp.status === 200) {
+                              console.log(resp);
+                              this.fileSource = this.visionService.getAudio();
+                              this.mostrarBoton = true;
+                              this.mostrarAudio = true;
+                            }
+
+                          }, (err: any) => {
+                            //this.mostrarError(err.error.error.message);
+                          }, () => {
+                            console.log('llega aqui');
+                            this.token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpb24iOiJlYXN0dXMyIiwic3Vic2NyaXB0aW9uLWlkIjoiODQwODJlNGJkZjZmNDkyOGE5OGY4ZDg3ZTQzNzhlYjgiLCJwcm9kdWN0LWlkIjoiU3BlZWNoU2VydmljZXMuRjAiLCJjb2duaXRpdmUtc2VydmljZXMtZW5kcG9pbnQiOiJodHRwczovL2FwaS5jb2duaXRpdmUubWljcm9zb2Z0LmNvbS9pbnRlcm5hbC92MS4wLyIsImF6dXJlLXJlc291cmNlLWlkIjoiL3N1YnNjcmlwdGlvbnMvNzBkYzk0ZmEtMDc0My00ZGNhLWE4NWMtY2IwOTc1M2EwM2Q4L3Jlc291cmNlR3JvdXBzL1pldXMvcHJvdmlkZXJzL01pY3Jvc29mdC5Db2duaXRpdmVTZXJ2aWNlcy9hY2NvdW50cy9zcGVlY2hkZW1vemV1cyIsInNjb3BlIjoic3BlZWNoc2VydmljZXMiLCJhdWQiOiJ1cm46bXMuc3BlZWNoc2VydmljZXMuZWFzdHVzMiIsImV4cCI6MTYzNzQ2MjI1NSwiaXNzIjoidXJuOm1zLmNvZ25pdGl2ZXNlcnZpY2VzIn0.A_tKYL-cLG0ivgXl0f_DbhL4oe16mJZSOm8F0LrEydE';
+                            /* this.visionService.getAudioFile(this.token, this.textoFinal )
+                               .subscribe((resp: any)=>{
+                                   console.log(resp);
+                               },(err:any)=>{
+                                 this.mostrarError(err.error.error.message);
+                               });
+                          });*/
+                      }
+                    }, (err: any) => {
+                      this.mostrarError(err.error.error.message);
+                    }, () => {
                     }
-                  }, (err: any) => {
-                    this.mostrarError(err.error.message);
-                  }, () => {
-                    this.fileSource = this.visionService.getAudio();
-                    this.mostrarBoton = true;
-                    this.mostrarAudio = true;
-                  }
-                  );
-              })
-            });
+                    );
+                })
+              }, (err: any) => {
+                this.mostrarError(err.error.error.message);
+              }, () => {
+              });
+          }
+        }, (err: any) => {
+          this.mostrarError(err.error.error.message);
+        }, () => { // When First Request Complete Call Second Request.
         });
     }
     this.files = [];
     this.selectedFile = false;
-
-
   }
 
   reload() {
     window.location.reload();
+  }
+
+  showLoading() {
+    Swal.fire({
+      title: 'Procesando Imágen...',
+      html: 'Por favor espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
   }
 
 
